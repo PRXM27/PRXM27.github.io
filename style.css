@@ -13,6 +13,15 @@ body {
   
 }
 
+.character-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  margin: 40px auto;
+  box-shadow: 0 0 20px rgba(235, 110, 8, 0.151);
+}
+
 /* แบนเนอร์เต็มความกว้างคอนเทนเนอร์ */
 .banner {
   position: relative;
@@ -170,53 +179,52 @@ h1 {
   flex-wrap: wrap;
   gap: 30px;
   margin: 50px auto;
-  max-width: 1400px;
-  padding: 0 20px;
+  max-width: 1600px; /* ขยายให้เท่ากับ container */
+  padding: 0 40px;   /* ขอบซ้ายขวาเหมือน container หลัก */
+  box-sizing: border-box;
 }
 
 .image-gallery img {
-  width: 90%; /* หรือขนาดที่คุณต้องการ */
+  width: 100%;
   max-width: 100%;
   height: auto;
   border-radius: 20px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  border: 10px solid white; /* กรอบสีขาว */
-  padding: 10px; /* ระยะห่างภายในกรอบ */
-  cursor: pointer; /* แสดงไอคอนมือชี้เมื่อเอาเมาส์ไปวาง */
+  border: 10px solid white;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.image-gallery img:hover {
-  transform: scale(1.02);
+@media (max-width: 768px) {
+  .image-gallery {
+    padding: 0 20px; /* ลดขอบลง */
+  }
+
+  .image-gallery img {
+    width: 100%; /* เต็มความกว้างมือถือ */
+    padding: 5px;
+    border: 6px solid white;
+  }
 }
+
 
 /* CSS สำหรับ image-gallery2 (Thumbnail รูปแนวยาว) */
-.image-gallery2 {
-  display: flex; /* ใช้ flexbox เพื่อจัดเรียง */
-  flex-wrap: wrap; /* ให้ขึ้นบรรทัดใหม่ได้ถ้าพื้นที่ไม่พอ */
-  justify-content: center; /* จัดกึ่งกลางรูปภาพในแกลเลอรี */
-  gap: 20px; /* ระยะห่างระหว่างรูปภาพ */
-  margin: 50px auto; /* ระยะห่างด้านบนและล่าง, จัดกึ่งกลาง */
-  max-width: 2000px; /* ความกว้างสูงสุดของแกลเลอรีนี้ */
-  padding: 0 20px;
-}
-
 .image-gallery2 img {
-  width: 600px; /* กำหนดความกว้างของ thumbnail ให้ตายตัว */
-  height: auto; /* ปล่อยให้ความสูงปรับตามสัดส่วนของรูปภาพแนวยาว */
-  max-width: 100%; /* ไม่ให้รูปใหญ่เกิน container */
-  border-radius: 15px; /* มุมโค้งมนเล็กน้อย */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* เงา */
+  flex: 0 1 calc(50% - 30px); /* แบ่งครึ่ง บวก gap */
+  width: calc(50% - 30px);
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  border: 8px solid #F0F0F0; /* กรอบสีเทาอ่อน */
-  padding: 5px; /* ระยะห่างภายในกรอบ */
-  cursor: pointer; /* แสดงไอคอนมือชี้ */
-  object-fit: contain; /* สำคัญสำหรับรูปแนวยาว: ทำให้รูปภาพพอดีกับพื้นที่โดยไม่ถูกตัด */
+  border: 10px solid white;
+  padding: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
-.image-gallery2 img:hover {
-  transform: scale(1.03); /* ขยายเล็กน้อยเมื่อเอาเมาส์ไปวาง */
-}
+
 
 /* สำหรับข้อความบรรยายใต้แกลเลอรี */
 .caption {
@@ -225,4 +233,41 @@ h1 {
   font-size: 4em; /* ขนาดตัวอักษร */
   color: #000000; /* สีข้อความ */
   font-weight: bold; /* ทำให้ตัวหนา */
+}
+
+/* =================== แก้ปัญหาในมือถือ =================== */
+@media screen and (max-width: 768px) {
+
+  /* ปรับให้กล่อง grid เป็นคอลัมน์เดียว */
+  .grid, .grid2 {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  /* ปรับขนาดรูปใน image-gallery */
+  .image-gallery img,
+  .image-gallery2 img {
+    width: 100%;         /* เต็มหน้าจอ */
+    padding: 0;          /* เอาระยะห่างในรูปออก ถ้าติดขอบ */
+    border: none;        /* ลบกรอบออกบนจอเล็กถ้าอยาก */
+  }
+
+  .container {
+    padding: 0 10px;     /* ลดขอบด้านข้างให้เต็มจอ */
+  }
+
+  .h1, h1 {
+    font-size: 2rem;     /* ลดขนาดหัวข้อให้พอดีจอเล็ก */
+  }
+
+  .bio-section {
+    padding: 30px 20px;
+    margin: 20px 10px;
+  }
+
+  .profile-img {
+    width: 200px;
+    height: 200px;
+  }
+
 }
